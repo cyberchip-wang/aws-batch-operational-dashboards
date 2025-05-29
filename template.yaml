@@ -205,7 +205,7 @@ Resources:
     Properties:
       Location:
         ApplicationId: arn:aws:serverlessrepo:us-east-1:292517598671:applications/AthenaDynamoDBConnector
-        SemanticVersion: 2023.46.2
+        SemanticVersion: 2025.15.1
       Parameters:
         AthenaCatalogName: aws-batch-jobs-data
         # WARNING: If set to 'true' encryption for spilled data is disabled.
@@ -323,7 +323,7 @@ Resources:
       DataSources:
         - ATHENA
         - CLOUDWATCH
-      GrafanaVersion: "9.4"
+      GrafanaVersion: "10.4"
       Name: "aws-batch-operation-dashboard"
       PluginAdminEnabled: true
       RoleArn: !Ref GrafanaRole
@@ -566,7 +566,7 @@ Resources:
           };
       Handler: 'index.handler'
       Timeout: 30
-      Runtime: nodejs16.x
+      Runtime: nodejs22.x
       ReservedConcurrentExecutions: 1
       Role: !GetAtt AWSCURCrawlerLambdaExecutor.Arn
 
@@ -660,7 +660,7 @@ Resources:
           };
       Handler: 'index.handler'
       Timeout: 30
-      Runtime: nodejs16.x
+      Runtime: nodejs22.x
       ReservedConcurrentExecutions: 1
       Role: !GetAtt AWSS3CURLambdaExecutor.Arn
 
