@@ -183,6 +183,9 @@
                     {
                         "S.$": "$$.Execution.Input.detail.jobId"
                     },
+                    "createdAt": {
+                        "N.$": "States.Format('{}',$$.Execution.Input.detail.createdAt)"
+                    },
                     "startedAt":
                     {
                         "N.$": "States.Format('{}',$$.Execution.Input.detail.startedAt)"
@@ -256,6 +259,9 @@
                     {
                         "S.$": "$$.Execution.Input.detail.jobId"
                     },
+                    "createdAt": {
+                        "N.$": "States.Format('{}',$$.Execution.Input.detail.createdAt)"
+                    },
                     "startedAt":
                     {
                         "S.$": "States.Format('{}',$$.Execution.Input.detail.startedAt)"
@@ -297,12 +303,12 @@
                 "TableName": "${BatchJobData}",
                 "Key":
                 {
-                    "jobId":
+                    "taskArn":
                     {
-                        "S.$": "$.Detail.jobId"
+                        "S.$": "$$.Detail.container.taskArn"
                     }
                 },
-                "UpdateExpression": "SET stoppedAt = :myValueRef, jobStatus=:jobStatus",
+                "UpdateExpression": "SET stoppedAt = :myValueRef, jobStatus = :jobStatus, statusReason = :statusReason, attempts = :attemptsCount",
                 "ExpressionAttributeValues":
                 {
                     ":myValueRef":
@@ -312,6 +318,14 @@
                     ":jobStatus":
                     {
                         "S.$": "$.LastEventType"
+                    },
+                    ":statusReason": 
+                    {
+                        "S.$": "States.Format('{}',$.Detail.statusReason)"
+                    },
+                    ":attemptsCount": 
+                    {
+                        "N.$": "States.ArrayLength($.Detail.attempts)"
                     }
                 }
             },
