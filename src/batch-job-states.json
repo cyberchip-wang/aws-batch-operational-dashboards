@@ -305,7 +305,7 @@
                 {
                     "taskArn":
                     {
-                        "S.$": "$$.Detail.container.taskArn"
+                        "S.$": "$$.Execution.Input.detail.container.taskArn"
                     }
                 },
                 "UpdateExpression": "SET stoppedAt = :myValueRef, jobStatus = :jobStatus, statusReason = :statusReason, attempts = :attemptsCount",
