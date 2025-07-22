@@ -325,7 +325,7 @@
                     },
                     ":attemptsCount": 
                     {
-                        "N.$": "States.ArrayLength($.Detail.attempts)"
+                        "N.$": "States.Format('{}', States.ArrayLength($.Detail.attempts))"
                     }
                 }
             },
